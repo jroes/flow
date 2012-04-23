@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "thunderboltlabs-flow" do
+describe "ThunderboltLabs::Flow" do
   it "works" do
     1.should == 1
   end

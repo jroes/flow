@@ -4,7 +4,7 @@ require "bundler/setup"
 require 'rspec'
 require 'fakeweb'
 
-require "thunderboltlabs-flow.rb"
+require "thunderboltlabs_flow.rb"
 
 FakeWeb.allow_net_connect = false
 
