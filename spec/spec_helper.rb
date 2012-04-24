@@ -7,26 +7,19 @@ require 'fakeweb'
 
 require "thunderboltlabs_flow.rb"
 
-Turnip.step_dirs = ['features']
+Turnip.step_dirs = ['spec/features']
 
 FakeWeb.allow_net_connect = false
 
+REPOSITORY_DIRECTORY = "/tmp/flow-specs-#{Process.pid}"
+CURRENT_DIRECTORY = Dir.pwd
+
 def create_dirs
-  # mkdir(Capybara.app.settings.views)
-  # mkdir(Capybara.app.settings.public_folder)
-  # mkdir(Capybara.app.settings.data_root)
+  FileUtils.mkdir_p(REPOSITORY_DIRECTORY)
 end
 
 def remove_dirs
-  # rmdir(Capybara.app.settings.root)
-end
-
-def mkdir(dir)
-  FileUtils.mkdir_p(dir)
-end
-
-def rmdir(dir)
-  FileUtils.rm_rf(dir)
+  FileUtils.rm_rf(REPOSITORY_DIRECTORY)
 end
 
 RSpec.configure do |config|
@@ -37,5 +30,7 @@ RSpec.configure do |config|
     remove_dirs
     create_dirs
   end
+
+  config.after(:each) { FileUtils.cd(CURRENT_DIRECTORY) }
 end
 
