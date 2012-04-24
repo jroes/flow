@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "thunderboltlabs_flow/version"
+require "thunderboltlabs/flow/version"
 
 Gem::Specification.new do |s|
-  s.name        = "thunderboltlabs_flow"
+  s.name        = "thunderboltlabs-flow"
   s.version     = ThunderboltLabs::Flow::VERSION
   s.authors     = ["Thunderbolt Labs"]
   s.email       = ["us@thunderboltlabs.com"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{TODO: Write a gem summary}
   s.description = %q{TODO: Write a gem description}
 
-  s.rubyforge_project = "thunderboltlabs_flow"
+  s.rubyforge_project = "thunderboltlabs-flow"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- spec/*`.split("\n")

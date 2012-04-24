@@ -5,7 +5,7 @@ require 'rspec'
 require 'turnip'
 require 'fakeweb'
 
-require "thunderboltlabs_flow.rb"
+require "thunderboltlabs/flow"
 
 Turnip.step_dirs = ['spec/features']
 
