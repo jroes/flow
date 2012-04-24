@@ -1,23 +1,30 @@
 require_relative "flow/version"
 require_relative "flow/git"
+require_relative "flow/command"
 
 module ThunderboltLabs
   class Flow
-    attr_accessor :arguments, :command, :stderr, :stdout, :stdin, :git, :return_code
+    attr_accessor :stderr, :stdout, :stdin, :return_code
 
     def initialize(args, opts = {})
-      self.arguments   = args
-      self.command     = arguments.shift
-      self.git         = Git.new
-      self.return_code = 0
+      @arguments    = args
+      @command      = command_from_name(@arguments.shift)
+      @git          = Git.new
+      @return_code  = 0
       opts[:stub_io] ? stub_io : init_io
+    end
+
+    def command_from_name(name)
+      Command.from_name(name).new(git:       @git,
+                                  arguments: @arguments,
+                                  stdout:    stdout,
+                                  stderr:    stderr,
+                                  stdin:     stdin)
     end
 
     def run!
       sanity_checks
-
-      stdout.puts "Running #{arguments}"
-      stderr.puts "foo"
+      @command.run!
     end
 
     def stub_io
@@ -33,7 +40,7 @@ module ThunderboltLabs
     end
 
     def sanity_checks
-      error("You are not in a git repository.") unless git.in_repo?
+      error("You are not in a git repository.") unless @git.in_repo?
     end
 
     def error(message)

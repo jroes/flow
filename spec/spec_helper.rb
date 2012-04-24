@@ -22,6 +22,10 @@ def remove_dirs
   FileUtils.rm_rf(REPOSITORY_DIRECTORY)
 end
 
+def git(command)
+  system "git #{command} > #{CURRENT_DIRECTORY}/log/test.log 2>&1"
+end
+
 RSpec.configure do |config|
   config.before(:suite) { create_dirs }
   config.after(:suite)  { remove_dirs }

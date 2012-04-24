@@ -1,6 +1,6 @@
 guard 'rspec', version: 2, cli: File.read(".rspec").delete("\n") do
   watch(%r{^spec/.+_spec\.rb$})
-  watch(%r{^spec/features/.+\.feature$})
+  watch(%r{^spec/.+\.feature$})
   watch(%r{^spec/.+_steps.rb$}) { "spec" }
   watch('spec/spec_helper.rb') { "spec" }
   watch(".rspec")              { "spec" }

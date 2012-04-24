@@ -2,7 +2,7 @@ module ThunderboltLabs
   class Flow
     class Git
       def in_repo?
-        false
+        File.directory?(".git")
       end
     end
   end
