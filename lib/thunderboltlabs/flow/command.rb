@@ -1,4 +1,5 @@
 class ThunderboltLabs::Flow::Command
+  attr_accessor :flow, :arguments
   def self.from_name(name)
     {
       start:  Start,
@@ -6,21 +7,23 @@ class ThunderboltLabs::Flow::Command
     }[name.to_sym] 
   end
 
-  def initialize(opts = {})
-    @opts = opts
+  def initialize(args, flow)
+    self.arguments = args
+    self.flow = flow
   end
 
   def run!
     sanity_checks
     run_command
-    puts "Running with #{@opts.inspect}"
   end
 
   def sanity_checks
+    unless flow.git.in_repo?
+      flow.error("You are not in a git repository.")
+    end
   end
 
   def run_command
-    raise "Implement this in your base class"
   end
 end
 
