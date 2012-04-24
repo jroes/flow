@@ -11,4 +11,5 @@ end
 
 step "I should see the error message :message" do |message|
   @flow.stderr.string.should include(message)
+  @flow.return_code.should_not == 0
 end
