@@ -2,9 +2,12 @@ ENV["RACK_ENV"] = "test"
 
 require "bundler/setup"
 require 'rspec'
+require 'turnip'
 require 'fakeweb'
 
 require "thunderboltlabs_flow.rb"
+
+Turnip.step_dirs = ['features']
 
 FakeWeb.allow_net_connect = false
 

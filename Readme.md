@@ -3,7 +3,7 @@
 ## Usage
 
 ``` bash
-> tbl start 1234 create widgets
+> flow start 1234 create widgets
 # Starts the Pivotal Tracker story #1234
 # Creates a remote tracking git branch named create_widgets_1234
 # Checks out the branch
@@ -12,7 +12,7 @@
 Now hack hack hack!  ...and when you're done:
 
 ``` bash
-> tbl finish
+> flow finish
 # Pulls master
 # Rebases against master
 # Pushes branch to github
@@ -30,7 +30,7 @@ Now hack hack hack!  ...and when you're done:
 
 # Authentication
 
-`tbl` relies upon your `.gitconfig` file for both Github and Pivotal Tracker authentication:
+`flow` relies upon your `.gitconfig` file for both Github and Pivotal Tracker authentication:
 
 ```
 [github]
