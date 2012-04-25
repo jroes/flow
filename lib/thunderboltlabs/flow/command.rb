@@ -1,5 +1,6 @@
+require 'active_support/core_ext/module/attribute_accessors'
+
 class ThunderboltLabs::Flow::Command
-  attr_accessor :flow, :arguments
   def self.from_name(name)
     {
       start:  Start,
@@ -7,23 +8,33 @@ class ThunderboltLabs::Flow::Command
     }[name.to_sym] 
   end
 
+  attr_accessor :flow, :arguments, :sanity_checks
+
   def initialize(args, flow)
     self.arguments = args
     self.flow = flow
-  end
+    self.sanity_checks = []
 
-  def run!
-    sanity_checks
-    run_command
-  end
-
-  def sanity_checks
-    unless flow.git.in_repo?
-      flow.error("You are not in a git repository.")
+    sanity_checks << lambda do
+      "You are not in a git repository." unless flow.git.in_repo?
     end
   end
 
+  def run!
+    check_sanity
+    run_command
+  end
+
   def run_command
+    # implemented by subclasses
+  end
+
+  def check_sanity
+    sanity_checks.detect do |check|
+      if message = check.call
+        flow.error(message)
+      end
+    end
   end
 end
 

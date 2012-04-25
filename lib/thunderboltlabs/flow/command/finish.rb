@@ -1,9 +1,9 @@
 class ThunderboltLabs::Flow::Command
   class Finish < self
-    def sanity_checks
+    def initialize(*args)
       super
-      unless flow.git.on_feature_branch?
-        flow.error("You aren't in a feature branch.")
+      sanity_checks << lambda do
+        "You aren't in a feature branch." unless flow.git.on_feature_branch?
       end
     end
   end

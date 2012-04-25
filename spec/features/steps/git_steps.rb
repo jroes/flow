@@ -23,3 +23,12 @@ step "I'm on the :branch_name branch" do |branch_name|
     git("checkout -b #{branch_name}")
   end
 end
+
+step "there are unstaged changes" do
+  system "echo 'foo' > me"
+end
+
+step "there are uncommitted changes" do
+  system "echo 'foo' > me"
+  git("add me")
+end

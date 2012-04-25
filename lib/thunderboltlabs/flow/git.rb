@@ -6,11 +6,31 @@ module ThunderboltLabs
       end
 
       def on_master?
-        false
+        branch_name == "master"
       end
 
       def on_feature_branch?
-        false
+        not on_master?
+      end
+
+      def branch_name
+        ref.split('/').last
+      end
+
+      def ref
+        git("symbolic-ref -q HEAD")
+      end
+
+      def git(args)
+        `git #{args}`.strip
+      end
+
+      def status
+        git("status")
+      end
+
+      def uncommitted_changes?
+        true
       end
     end
   end

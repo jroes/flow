@@ -11,3 +11,9 @@ Feature: Running in a git directory, unhappy paths
     When I'm on the master branch
     When I run flow finish
     Then I should see the error message "You aren't in a feature branch"
+
+  Scenario: Trying to run start when there are uncommitted changes
+    When there are uncommitted changes
+     And I run flow start 1234 foo
+    Then I should see the error message "There are uncommitted changes"
+
